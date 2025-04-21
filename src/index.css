@@ -121,16 +121,12 @@
 }
 
 @layer utilities {
-	.text-primary {
-		@apply text-orange-600;
+	.text-danger {
+		@apply text-red-600;
 	}
 
-	.bg-primary {
-		@apply bg-orange-600;
-	}
-
-	.border-b-primary {
-		@apply border-b-orange-600;
+	.bg-danger {
+		@apply bg-red-600;
 	}
 }
 
@@ -161,7 +157,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.9));
+	background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5));
 }
 
 .avatar-box {

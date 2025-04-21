@@ -1,9 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+// components
+import { Button } from "@/components/ui/button";
 
 const LandingPage = () => {
     return (
-        <div className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-28">
+        <div className="flex flex-col gap-10 sm:gap-20 py-20 sm:py-32">
             <section className="text-center">
                 <h1 className="font-extrabold xl:text-7xl tracking-tighter py-4">
                     Find Your Dream Job and get Hired.
