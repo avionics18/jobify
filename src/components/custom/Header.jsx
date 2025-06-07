@@ -12,7 +12,13 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 // icons
-import { LogIn, BriefcaseBusiness, PenBox, Heart } from "lucide-react";
+import {
+    LogIn,
+    BriefcaseBusiness,
+    PenBox,
+    Heart,
+    FileText,
+} from "lucide-react";
 
 const Header = () => {
     const [isSignInVisible, setIsSignInVisible] = useState(false);
@@ -22,7 +28,7 @@ const Header = () => {
 
     useEffect(() => {
         // check if search params contains "?sign-in=true"
-        // if yes, display the sign in modal
+        // if yes, display the sign in popup
         if (search.get("sign-in") === "true") {
             setIsSignInVisible(true);
             setSearch({});
@@ -47,12 +53,28 @@ const Header = () => {
                         <>
                             <SignedOut>
                                 <Button
+                                    className="dark:hover:bg-primary/20 border border-transparent dark:hover:border-primary"
+                                    variant="ghost"
+                                    asChild
+                                >
+                                    <Link to="/jobs">Find Jobs</Link>
+                                </Button>
+                                <Button
                                     onClick={() => setIsSignInVisible(true)}
                                 >
                                     <LogIn /> Login
                                 </Button>
                             </SignedOut>
                             <SignedIn>
+                                <div className="flex items-center gap-4 me-2">
+                                    <Button
+                                        className="dark:hover:bg-primary/20 border border-transparent dark:hover:border-primary"
+                                        variant="ghost"
+                                        asChild
+                                    >
+                                        <Link to="/jobs">Find Jobs</Link>
+                                    </Button>
+                                </div>
                                 {user?.unsafeMetadata?.role === "recruiter" && (
                                     <Button asChild>
                                         <Link to="/post-job">
@@ -67,6 +89,18 @@ const Header = () => {
                                         },
                                     }}
                                 >
+                                    {user?.unsafeMetadata?.role ===
+                                        "candidate" && (
+                                        <UserButton.MenuItems>
+                                            <UserButton.Link
+                                                label="My Resumes"
+                                                labelIcon={
+                                                    <FileText size={15} />
+                                                }
+                                                href="/my-resumes"
+                                            />
+                                        </UserButton.MenuItems>
+                                    )}
                                     <UserButton.MenuItems>
                                         <UserButton.Link
                                             label="My Jobs"
@@ -94,7 +128,7 @@ const Header = () => {
 
             {/* SignIn Modal Dialog */}
             <Dialog open={isSignInVisible} onOpenChange={setIsSignInVisible}>
-                <DialogContent className="">
+                <DialogContent className="w-auto py-10">
                     <SignIn
                         signUpForceRedirectUrl="/onboarding"
                         fallbackRedirectUrl="/onboarding"

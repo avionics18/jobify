@@ -7,7 +7,7 @@ async function addNewRecruiter(token, _, recruiterData) {
 
     const { data, error } = await query;
     if (error) {
-        console.log("Error creating recruiter:", error);
+        console.error("Error creating recruiter:", error);
         return Promise.reject(error);
     } else {
         return data;

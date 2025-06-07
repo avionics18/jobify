@@ -53,12 +53,15 @@ let query = supabase
     .select("*, company: company(name, logo_url), saved: saved_job(id)");
 ```
 
-```
-// 1:50:18 - Supabase admin changes
-email: avi@gmail.com
-userId: user_2vikssV7XHF0ujPo8M9RLW5YyBg
-email: shubham@gmail.com
-userId: user_2vjIJL58Ggalqwh5CiYS8K9tCco
-```
+### Users
 
-**2:00:40 - Filters**
+`email`: avimurmu18@gmail.com
+`password`: TiVErtiorT
+
+**Atlassian**
+`email`: rajeev@gmail.com
+`password`: sImetATECK
+
+**Google**
+`email`: ankita@gmail.com
+`password`: OrDaRampro

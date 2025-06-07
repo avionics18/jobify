@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // utils
 import { cn } from "@/lib/utils";
 // components
@@ -21,7 +21,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 // icons
 import { Check, ChevronsUpDown } from "lucide-react";
 
-const CompanyComboBox = ({ loading, error, companies, setCompanyID }) => {
+const CompanyComboBox = ({
+    loading = false,
+    error = null,
+    companies = [],
+    setCompanyID = () => {},
+}) => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [label, setLabel] = useState(null);
@@ -29,29 +34,31 @@ const CompanyComboBox = ({ loading, error, companies, setCompanyID }) => {
     if (loading !== null && !error) {
         if (loading) {
             return (
-                <>
+                <div>
                     <TopLoader />
-                    <Skeleton className="w-full h-9 rounded-sm" />
-                </>
+                    <p className="mb-2 text-sm">Select Company</p>
+                    <Skeleton className="w-full h-9 rounded-md" />
+                </div>
             );
         } else {
             return (
-                <>
+                <div>
+                    <p className="mb-2 text-sm">Select Company</p>
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
                             <Button
                                 variant="outline"
                                 role="combobox"
                                 aria-expanded={open}
-                                className="w-full justify-between"
+                                className="w-[350px] justify-between"
                             >
-                                {value ? label : "Select Company..."}
+                                {value ? label : "No company selected"}
                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-[350px] p-0">
                             <Command>
-                                <CommandInput placeholder="Search Company..." />
+                                <CommandInput placeholder="Enter company name" />
                                 <CommandList>
                                     <CommandEmpty>
                                         No company found.
@@ -104,7 +111,7 @@ const CompanyComboBox = ({ loading, error, companies, setCompanyID }) => {
                             </Command>
                         </PopoverContent>
                     </Popover>
-                </>
+                </div>
             );
         }
     }

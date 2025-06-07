@@ -12,6 +12,7 @@ import SavedJobs from "@/pages/SavedJobs";
 import MyJobs from "@/pages/MyJobs";
 // components
 import ProtectedRoute from "@/components/custom/ProtectedRoute";
+import MyResumes from "@/pages/MyResumes";
 
 const router = createBrowserRouter([
     {
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <MyJobs />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "/my-resumes",
+                element: (
+                    <ProtectedRoute>
+                        <MyResumes />
                     </ProtectedRoute>
                 ),
             },

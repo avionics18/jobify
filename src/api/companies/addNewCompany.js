@@ -5,7 +5,7 @@ async function addNewCompany(token, _, companyData) {
 
     try {
         // logo upload logic
-        const random = Math.floor(Math.random * 9000);
+        const random = Math.floor(Math.random() * 9000);
         const fileName = `logo-${random}-${companyData.name}`;
 
         const { error: storageError } = await supabase.storage
@@ -13,7 +13,7 @@ async function addNewCompany(token, _, companyData) {
             .upload(fileName, companyData.logo);
 
         if (storageError) {
-            console.log("Error uploading company logo:", storageError);
+            console.error("Error uploading company logo:", storageError);
             throw new Error("Error uploading company logo.");
         } else {
             // if company logo upload was successfull
@@ -31,14 +31,14 @@ async function addNewCompany(token, _, companyData) {
 
             const { data, error: compCreationEroor } = await query;
             if (compCreationEroor) {
-                console.log("Error creating company:", compCreationEroor);
+                console.error("Error creating company:", compCreationEroor);
                 throw new Error("Error creating company");
             } else {
                 return data;
             }
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return null;
     }
 }

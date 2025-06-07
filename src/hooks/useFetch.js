@@ -9,17 +9,19 @@ const useFetch = (cb, options = {}) => {
     const { session } = useSession();
 
     const fn = async (...args) => {
+        // args will be passed when the function is called
+        // from a component with some arguments
         setLoading(true);
-        setError(null);
 
         try {
             const supabaseAccessToken = await session.getToken({
                 template: "supabase",
             });
 
+            // options will be passed at the useFetch line
             const response = await cb(supabaseAccessToken, options, ...args);
             setData(response);
-            setError(null);
+            return response;
         } catch (error) {
             setError(error);
             return Promise.reject(error);

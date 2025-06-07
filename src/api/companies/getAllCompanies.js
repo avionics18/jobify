@@ -7,7 +7,7 @@ async function getAllCompanies(token) {
 
     const { data, error } = await query;
     if (error) {
-        console.log("Error fetching companies:", error);
+        console.error("Error fetching companies:", error);
         return null;
     } else {
         return data;

@@ -12,12 +12,17 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CompanyComboBox from "@/components/custom/CompanyComboBox";
+import CompanyCreateForm from "@/components/custom/CompanyCreateForm";
 
-const CompanyTabs = ({ tab, tabChangeHandler, setCompanyID }) => {
+const CompanyTabs = ({
+    tab,
+    tabChangeHandler,
+    setCompanyID,
+    parentSubmitHandler,
+    saveBtnRef,
+}) => {
     const { isLoaded } = useUser();
 
     const {
@@ -63,51 +68,14 @@ const CompanyTabs = ({ tab, tabChangeHandler, setCompanyID }) => {
                             }))}
                             setCompanyID={setCompanyID}
                         />
-                        {/* <p className="text-sm text-danger mt-2">
-                            Required field - Please select a company.
-                        </p> */}
                     </CardContent>
                 </Card>
             </TabsContent>
             <TabsContent value="create-company">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Create Company</CardTitle>
-                        <CardDescription>
-                            Register your company to hire the best talent across
-                            the globe. After saving, you'll be redirected to
-                            dashboard.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                            <Label className="font-light" htmlFor="companyName">
-                                Company Name
-                                <span className="text-danger font-bold">*</span>
-                            </Label>
-                            <Input id="companyName" type="text" />
-                            {/* <p className="text-sm text-danger">
-                                Required field
-                            </p> */}
-                        </div>
-                        <div className="space-y-2">
-                            <Label className="font-light" htmlFor="companyLogo">
-                                Company Logo
-                                <span className="text-danger font-bold">*</span>
-                            </Label>
-                            <Input id="companyLogo" type="text" />
-                        </div>
-                        <div className="space-y-2">
-                            <Label
-                                className="font-light"
-                                htmlFor="companyWebsite"
-                            >
-                                Company Website
-                            </Label>
-                            <Input id="companyWebsite" type="text" />
-                        </div>
-                    </CardContent>
-                </Card>
+                <CompanyCreateForm
+                    saveBtnRef={saveBtnRef}
+                    parentSubmitHandler={parentSubmitHandler}
+                />
             </TabsContent>
         </Tabs>
     );

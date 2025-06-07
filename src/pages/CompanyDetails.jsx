@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 // api
-import { addNewRecruiter } from "@/api";
+import { addNewCompany, addNewRecruiter } from "@/api";
 // hooks
 import useFetch from "@/hooks/useFetch";
 // components
 import { Button } from "@/components/ui/button";
 import CompanyTabs from "@/components/custom/CompanyTabs";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
 import TopLoader from "@/components/custom/TopLoader";
 
 const CompanyDetails = ({
@@ -20,12 +19,14 @@ const CompanyDetails = ({
 }) => {
     const [tab, setTab] = useState("select-company");
     const [companyID, setCompanyID] = useState(null);
+    const saveBtnRef = useRef(null);
 
     const { isLoaded, user } = useUser();
 
     const navigate = useNavigate();
 
     const { fn: fnAddNewRecruiter } = useFetch(addNewRecruiter);
+    const { fn: fnAddNewCompany, data: companyData } = useFetch(addNewCompany);
 
     const tabChangeHandler = () => {
         setTab((prev) => {
@@ -34,7 +35,7 @@ const CompanyDetails = ({
         });
     };
 
-    const onSubmitHandler = async () => {
+    const onSubmitHandler = async (createCompanyFormData) => {
         if (isLoaded) {
             if (tab === "select-company") {
                 if (companyID === null) {
@@ -56,7 +57,7 @@ const CompanyDetails = ({
                         });
                         navigate("/post-job");
                     } catch (error) {
-                        console.log(error);
+                        console.error(error);
                         toast.error("Error", {
                             description: error.message,
                         });
@@ -67,6 +68,44 @@ const CompanyDetails = ({
                 }
             } else if (tab === "create-company") {
                 // create company onSubmitHandler logic
+                try {
+                    setLoading(true);
+                    // 1. Create a new company
+                    const res = await fnAddNewCompany({
+                        name: createCompanyFormData.name,
+                        logo: createCompanyFormData.logo[0],
+                        website: createCompanyFormData.website,
+                    });
+                    const { id } = res[0];
+                    setCompanyID(id);
+                    // 2. Company has been created successfully
+                    // and the recruiter belongs to that new company
+                    await fnAddNewRecruiter({
+                        recruiter_id: user.id,
+                        company_id: id,
+                    });
+                    // 3. Update the unsafeMetaData role
+                    await user.update({
+                        unsafeMetadata: {
+                            role: userRole,
+                        },
+                    });
+                    navigate("/my-jobs", {
+                        state: {
+                            message: "Company Created",
+                            description:
+                                "Company has been created successfully!",
+                        },
+                    });
+                } catch (error) {
+                    console.error(error);
+                    toast.error("Error", {
+                        description: error.message,
+                    });
+                    navigate("/onboarding");
+                } finally {
+                    setLoading(false);
+                }
             }
         }
     };
@@ -74,7 +113,6 @@ const CompanyDetails = ({
     return (
         <>
             {loading && <TopLoader />}
-            <Toaster richColors closeButton />
             <section>
                 <h1 className="text-center font-bold text-3xl xl:text-5xl tracking-tighter mb-10">
                     Enter Company Details
@@ -84,6 +122,8 @@ const CompanyDetails = ({
                         tab={tab}
                         tabChangeHandler={tabChangeHandler}
                         setCompanyID={setCompanyID}
+                        parentSubmitHandler={onSubmitHandler}
+                        saveBtnRef={saveBtnRef}
                     />
                 </div>
                 <p className="text-center mt-10">
@@ -95,13 +135,20 @@ const CompanyDetails = ({
                     >
                         Back
                     </Button>
-                    <Button
-                        size="lg"
-                        onClick={onSubmitHandler}
-                        disabled={loading}
-                    >
-                        Save Changes
-                    </Button>
+                    {tab === "select-company" ? (
+                        <Button
+                            ref={saveBtnRef}
+                            size="lg"
+                            onClick={onSubmitHandler}
+                            disabled={loading}
+                        >
+                            Save Changes
+                        </Button>
+                    ) : (
+                        <Button ref={saveBtnRef} size="lg" disabled={loading}>
+                            Save Changes
+                        </Button>
+                    )}
                 </p>
             </section>
         </>

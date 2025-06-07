@@ -1,0 +1,79 @@
+[
+	{
+		"id": 2,
+		"created_at": "2025-04-15T02:51:15.953018+00:00",
+		"recruiter_id": "user_2vikssV7XHF0ujPo8M9RLW5YyBg",
+		"company_id": 1,
+		"title": "Data Scientist",
+		"description": "Leverage behavioural data to improve product engagement, onboarding, and retention.",
+		"location": "Hyderabad",
+		"requirements": "- Strong in Python, SQL, and data storytelling\n- A/B testing and cohort analysis\n- Data pipeline and visualization experience\n- Comfortable with Amplitude, Looker, or Tableau\n- MS in Statistics or related field preferred",
+		"isOpen": true,
+		"salary": 3160000,
+		"job_type": "Full-Time",
+		"work_mode": "Hybrid",
+		"company": {
+			"name": "Google",
+			"logo_url": "https://smmzpydtwknfbombweoy.supabase.co/storage/v1/object/public/company-logo//google.png"
+		},
+		"saved": [
+			{
+				"id": 15
+			}
+		],
+		"applications": [
+			{
+				"id": "1",
+				"name": "Shubham Yadav",
+				"status": "applied"
+			},
+			{
+				"id": "2",
+				"name": "Amit Kumar",
+				"status": "applied"
+			}
+		]
+	},
+	{
+		"id": 3,
+		"created_at": "2025-04-15T02:52:48.991316+00:00",
+		"recruiter_id": "user_2vikssV7XHF0ujPo8M9RLW5YyBg",
+		"company_id": 2,
+		"title": "Product Manager",
+		"description": "Guide Jira/Confluence feature development with customer feedback loops.",
+		"location": "Bengaluru",
+		"requirements": "- Empathy-driven product mindset\n- Agile experience in SaaS\n- Strong collaboration with design and engineering\n- Data literacy and experimentation focus\n- Experience working with developer-centric products",
+		"isOpen": true,
+		"salary": 2500000,
+		"job_type": "Full-Time",
+		"work_mode": "On-Site",
+		"company": {
+			"name": "Flipkart",
+			"logo_url": "https://smmzpydtwknfbombweoy.supabase.co/storage/v1/object/public/company-logo//flipkart.png"
+		},
+		"saved": []
+	},
+	{
+		"id": 1,
+		"created_at": "2025-04-15T02:46:05.420629+00:00",
+		"recruiter_id": "user_2vikssV7XHF0ujPo8M9RLW5YyBg",
+		"company_id": 3,
+		"title": "Frontend Developer",
+		"description": "Craft seamless, beautiful UIs for tools like Jira and Confluence used by millions globally.",
+		"location": "Bengaluru",
+		"requirements": "- Strong React + Redux knowledge\n- CSS-in-JS (e.g., Emotion, styled-components)\n- Component-driven development experience\n- Understanding of accessibility standards\n- Collaborate with design and product teams",
+		"isOpen": true,
+		"salary": 2180000,
+		"job_type": "Full-Time",
+		"work_mode": "Remote",
+		"company": {
+			"name": "Atlassian",
+			"logo_url": "https://smmzpydtwknfbombweoy.supabase.co/storage/v1/object/public/company-logo//atlassian.png"
+		},
+		"saved": [
+			{
+				"id": 14
+			}
+		]
+	}
+]

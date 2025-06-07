@@ -18,12 +18,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {
-    TooltipProvider,
-    Tooltip,
-    TooltipTrigger,
-    TooltipContent,
-} from "@/components/ui/tooltip";
 import CustomTooltip from "@/components/custom/CustomTooltip";
 // icons
 import {

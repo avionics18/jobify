@@ -45,7 +45,7 @@ const OnBoarding = () => {
                     navigate(userRole === "recruiter" ? "/post-job" : "/jobs");
                 })
                 .catch((err) => {
-                    console.log("Error updating role: ", err);
+                    console.error("Error updating role: ", err);
                 });
         } else {
             // userRole == "recuiter" then display form to
@@ -71,6 +71,9 @@ const OnBoarding = () => {
             ) : (
                 <>
                     {loading && <TopLoader />}
+                    <p className="text-center text-white/60 mb-3">
+                        Welcome aboard!
+                    </p>
                     <h1 className="text-center font-bold text-3xl xl:text-5xl tracking-tighter mb-10">
                         Please Select Your Role
                     </h1>

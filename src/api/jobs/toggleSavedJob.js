@@ -13,7 +13,7 @@ async function toggleSavedJob(token, { isJobSavedAlready }, saveData) {
         const { data, error: delError } = await query;
 
         if (delError) {
-            console.log("Error deleting job from saved_job:", delError);
+            console.error("Error removing job from saved_job:", delError);
             return null;
         } else {
             return data;
@@ -24,7 +24,7 @@ async function toggleSavedJob(token, { isJobSavedAlready }, saveData) {
         let query = supabase.from("saved_job").insert([saveData]).select();
         const { data, error: insertError } = await query;
         if (insertError) {
-            console.log("Error saving job into saved_job:", insertError);
+            console.error("Error adding job into saved_job:", insertError);
             return null;
         } else {
             return data;

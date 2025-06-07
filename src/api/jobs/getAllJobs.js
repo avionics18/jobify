@@ -27,7 +27,7 @@ async function getAllJobs(token, { location, compnay_id, searchQuery }) {
 
     const { data, error } = await query;
     if (error) {
-        console.log("Error fetching jobs:", error);
+        console.error("Error fetching jobs:", error);
         return null;
     } else {
         return data;
