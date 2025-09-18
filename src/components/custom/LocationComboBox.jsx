@@ -20,45 +20,35 @@ import {
 // icons
 import { Check, ChevronsUpDown } from "lucide-react";
 
-const LocationComboBox = ({ setLocation }) => {
-    const locations = [
-        {
-            value: "1",
-            label: "Bengaluru",
-        },
-        {
-            value: "2",
-            label: "Pune",
-        },
-        {
-            value: "3",
-            label: "Hyderabad",
-        },
-        {
-            value: "4",
-            label: "Delhi",
-        },
-    ];
-
+const LocationComboBox = ({
+    locations,
+    setLocation,
+    placeholderText = "Select Location",
+    labelText = "",
+    popoverWidthClass = "w-[350px]",
+}) => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [label, setLabel] = useState(null);
 
     return (
-        <>
+        <div>
+            {labelText && (
+                <p className="text-primary text-sm mb-2">{labelText}</p>
+            )}
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
-                        className="w-[350px] justify-between"
+                        className="w-full justify-between"
                     >
-                        {value ? label : "Select Location..."}
+                        {value ? label : placeholderText}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[350px] p-0">
+                <PopoverContent className={`${popoverWidthClass} p-0`}>
                     <Command>
                         <CommandInput placeholder="Search Location..." />
                         <CommandList>
@@ -109,7 +99,7 @@ const LocationComboBox = ({ setLocation }) => {
                     </Command>
                 </PopoverContent>
             </Popover>
-        </>
+        </div>
     );
 };
 

@@ -1,11 +1,24 @@
+import { cn } from "@/lib/utils";
+// components
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-const JobTypeFilter = () => {
+const JobTypeFilter = ({
+    labelText = "",
+    labelTextClassName = "",
+    radioAlignHorizontal = false,
+}) => {
     return (
         <div>
-            <p className="mb-2 text-sm">Select Job Type</p>
-            <RadioGroup defaultValue="default_jobType">
+            <p className={cn("text-sm mb-3", labelTextClassName)}>
+                {labelText}
+            </p>
+            <RadioGroup
+                className={cn(
+                    radioAlignHorizontal && "grid-flow-col justify-start"
+                )}
+                defaultValue="default_jobType"
+            >
                 <div className="flex items-center space-x-2">
                     <RadioGroupItem
                         value="default_jobType"

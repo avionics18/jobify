@@ -4,9 +4,8 @@ import { Search } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import LocationComboBox from "@/components/custom/LocationComboBox";
 
-const MainFilters = ({ setSearchQuery, setLocation }) => {
+const MainFilters = ({ setSearchQuery }) => {
     const searchHandler = (e) => {
         e.preventDefault();
         let formData = new FormData(e.target);
@@ -19,19 +18,18 @@ const MainFilters = ({ setSearchQuery, setLocation }) => {
 
     return (
         <Card className="mb-6">
-            <CardContent>
+            <CardContent className="sm:mx-12">
                 <form
                     onSubmit={searchHandler}
-                    className="flex items-center gap-6"
+                    className="flex items-stretch gap-6"
                 >
                     <Input
                         name="search-query"
                         type="text"
-                        className="flex-1 px-4"
+                        className="h-12 flex-1 px-4"
                         placeholder="Serach jobs by title..."
                     />
-                    <LocationComboBox setLocation={setLocation} />
-                    <Button type="submit" className="w-[150px]">
+                    <Button type="submit" className="h-12 w-[180px]">
                         <Search /> Search
                     </Button>
                 </form>

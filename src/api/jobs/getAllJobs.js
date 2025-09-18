@@ -9,6 +9,9 @@ async function getAllJobs(token, { location, compnay_id, searchQuery }) {
     // the currently logged in user exists or not, if yes return the id of the record
     // so every job will have { saved: [] } or {saved: [ {id: xx} ]}. (Ignore []).
     // -> We're going to use it to display the heart icon btn as active or disabled.
+
+    // In SQL, you would have to join the two tables, but here supabase automatically
+    // does it, you don't need to sepcify in the query.
     let query = supabase
         .from("job")
         .select("*, company: company(name, logo_url), saved: saved_job(id)");

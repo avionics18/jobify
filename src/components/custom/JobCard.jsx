@@ -120,7 +120,7 @@ const JobCard = ({
                         <span>&bull;</span>
                         <span className="flex items-center gap-1">
                             <MapPin size={14} />
-                            {job.location}
+                            {job.city}
                         </span>
                     </p>
                 </div>
@@ -140,18 +140,18 @@ const JobCard = ({
                 </p>
             </CardHeader>
             <CardContent>
-                <p className="flex items-center gap-2 mb-4">
+                <p className="flex items-center gap-2 mb-4 capitalize">
                     <Badge variant="secondary">{job.job_type}</Badge>
                     <Badge variant="secondary">{job.work_mode}</Badge>
                 </p>
-                <p className="text-zinc-300">
+                <p className="text-zinc-300 text-sm">
                     {job.description.substring(0, job.description.indexOf("."))}
                     .
                 </p>
             </CardContent>
             <CardFooter className="flex items-center justify-between">
                 <p className="text-xl">
-                    <span className="text-primary font-semibold">
+                    <span className="font-bold">
                         {salaryFormatter.format(job.salary)}
                     </span>
                     <span className="text-zinc-500"> / yr</span>

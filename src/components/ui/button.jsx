@@ -22,7 +22,7 @@ const buttonVariants = cva(
                     "text-orange-500 bg-orange-500/10 border border-orange-700 hover:bg-orange-500/20 shadow-xs",
                 secondary:
                     "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
-                "secondary-light": "bg-zinc-700 hover:bg-zinc-800",
+                "secondary-light": "bg-zinc-700 hover:bg-zinc-700/90",
                 ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
                 link: "text-primary underline-offset-4 hover:underline",
             },

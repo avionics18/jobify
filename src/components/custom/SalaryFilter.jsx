@@ -12,7 +12,7 @@ const SalaryFilter = () => {
 
     return (
         <div>
-            <p className="mb-2 text-sm">Select Salary (per annum)</p>
+            <p className="text-primary text-sm mb-2">By Salary (per annum)</p>
             <Select
                 value={value}
                 onValueChange={(currVal) => setValue(currVal)}

@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
 // api
-import { getAllCompanies, getAllJobs } from "@/api";
+import { getAllJobs } from "@/api";
 // hooks
 import useFetch from "@/hooks/useFetch";
 // components
-import TopLoader from "@/components/custom/TopLoader";
-import JobCard from "@/components/custom/JobCard";
-import NoResultsFound from "@/components/custom/NoResultsFound";
-import JobLoadingCards from "@/components/custom/JobLoadingCards";
 import MainFilters from "@/components/custom/MainFilters";
 import SidebarFilters from "@/components/custom/SidebarFilters";
 import JobGrid from "@/components/custom/JobGrid";
@@ -16,69 +12,30 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const JobListing = () => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [location, setLocation] = useState("");
+    const [city, setCity] = useState("");
     const [companyID, setCompanyID] = useState("");
     const [salaryRange, setSalaryRange] = useState(null);
     const [jobType, setJobType] = useState("");
     const [workMode, setWorkMode] = useState("");
 
-    const { isLoaded, user } = useUser();
-
-    const {
-        fn: fnCompanies,
-        data: dataCompanies,
-        loading: loadingCompanies,
-        error: errorCompanies,
-    } = useFetch(getAllCompanies);
+    const { isLoaded } = useUser();
 
     const {
         fn: fnJobs,
         data: dataJobs,
         loading: loadingJobs,
         error: errorJobs,
-    } = useFetch(getAllJobs, { location, company_id: companyID, searchQuery });
-
-    useEffect(() => {
-        if (isLoaded) {
-            fnCompanies();
-        }
-    }, [isLoaded]);
+    } = useFetch(getAllJobs, {
+        location: city,
+        company_id: companyID,
+        searchQuery,
+    });
 
     useEffect(() => {
         if (isLoaded) {
             fnJobs();
         }
-    }, [isLoaded, location, companyID, searchQuery]);
-
-    const displayJobs = () => {
-        if (loadingJobs !== null && !errorJobs) {
-            if (loadingJobs) {
-                return (
-                    <>
-                        <TopLoader />
-                        <JobLoadingCards />
-                    </>
-                );
-            } else {
-                if (dataJobs.length) {
-                    return dataJobs.map((job) => (
-                        <JobCard
-                            key={job.id}
-                            job={job}
-                            isMyJob={job.recruiter_id === user.id}
-                            savedInit={job.saved.length > 0}
-                        />
-                    ));
-                } else {
-                    return (
-                        <div className="col-span-4">
-                            <NoResultsFound />
-                        </div>
-                    );
-                }
-            }
-        }
-    };
+    }, [isLoaded, city, companyID, searchQuery]);
 
     return (
         <section className="py-12">
@@ -86,19 +43,19 @@ const JobListing = () => {
                 Latest Jobs
             </h1>
             {/* Search Filter */}
-            <MainFilters
-                setSearchQuery={setSearchQuery}
-                setLocation={setLocation}
-            />
+            <MainFilters setSearchQuery={setSearchQuery} />
             <div className="job-mini-dash flex items-start gap-6">
-                <div className="filters-sidebar w-[400px] sticky top-10">
+                <div className="filters-sidebar w-[500px] sticky top-10">
                     {/* Sidebar Filters */}
                     <Card>
                         <CardContent>
                             <h3 className="font-bold text-xl mb-4">
                                 Filters Jobs
                             </h3>
-                            <SidebarFilters />
+                            <SidebarFilters
+                                setCity={setCity}
+                                popoverWidthClass="w-[450px]"
+                            />
                         </CardContent>
                     </Card>
                 </div>

@@ -36,14 +36,14 @@ const CompanyComboBox = ({
             return (
                 <div>
                     <TopLoader />
-                    <p className="mb-2 text-sm">Select Company</p>
+                    <p className="text-primary text-sm mb-2">By Company</p>
                     <Skeleton className="w-full h-9 rounded-md" />
                 </div>
             );
         } else {
             return (
                 <div>
-                    <p className="mb-2 text-sm">Select Company</p>
+                    <p className="text-primary text-sm mb-2">By Company</p>
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
                             <Button

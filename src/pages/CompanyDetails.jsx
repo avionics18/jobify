@@ -77,7 +77,6 @@ const CompanyDetails = ({
                         website: createCompanyFormData.website,
                     });
                     const { id } = res[0];
-                    setCompanyID(id);
                     // 2. Company has been created successfully
                     // and the recruiter belongs to that new company
                     await fnAddNewRecruiter({
@@ -92,9 +91,9 @@ const CompanyDetails = ({
                     });
                     navigate("/my-jobs", {
                         state: {
-                            message: "Company Created",
+                            message: "Onboarded Successfully",
                             description:
-                                "Company has been created successfully!",
+                                "Congratulations! You've been onboarded successfully.",
                         },
                     });
                 } catch (error) {

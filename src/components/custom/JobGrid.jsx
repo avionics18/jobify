@@ -1,3 +1,5 @@
+import { useUser } from "@clerk/clerk-react";
+
 // components
 import JobCard from "@/components/custom/JobCard";
 import JobLoadingCards from "@/components/custom/JobLoadingCards";
@@ -5,6 +7,8 @@ import NoResultsFound from "@/components/custom/NoResultsFound";
 import TopLoader from "@/components/custom/TopLoader";
 
 const JobGrid = ({ loadingJobs, errorJobs, dataJobs }) => {
+    const { user } = useUser();
+
     if (loadingJobs !== null && !errorJobs) {
         if (loadingJobs) {
             return (
@@ -14,7 +18,7 @@ const JobGrid = ({ loadingJobs, errorJobs, dataJobs }) => {
                 </>
             );
         } else {
-            if (dataJobs.length) {
+            if (dataJobs?.length) {
                 return dataJobs.map((job) => (
                     <JobCard
                         key={job.id}
@@ -32,7 +36,5 @@ const JobGrid = ({ loadingJobs, errorJobs, dataJobs }) => {
             }
         }
     }
-
-    return "";
 };
 export default JobGrid;
